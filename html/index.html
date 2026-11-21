@@ -1,38 +1,190 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>تجربة</title>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta http-equiv="Content-Security-Policy" content="default-src 'none';style-src 'unsafe-inline';script-src 'unsafe-inline';img-src data:"><title>AMAN أمان</title>
 <style>
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  body{margin:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;background:linear-gradient(160deg,#1e1b4b,#0f172a);color:#fff;font-family:sans-serif}
-  h1{margin:0;font-size:22px;opacity:.8}
-  #n{font-size:96px;font-weight:700}
-  button{width:200px;height:200px;border-radius:50%;border:0;font-size:28px;color:#fff;background:#f59e0b;box-shadow:0 10px 30px #f59e0b66;transition:transform .08s}
-  button:active{transform:scale(.92)}
-  #r{background:none;width:auto;height:auto;font-size:16px;box-shadow:none;opacity:.6;border-radius:0}
-</style>
-</head>
-<body>
-  <h1>تطبيقي التجريبي ✅</h1>
-  <div id="n">0</div>
-  <button id="b">اضغط</button>
-  <button id="r">تصفير</button>
+:root{--bg:#070b1a;--cd:#111833;--tx:#eef0ff;--mu:#8b93bd;--ac:#7c5cff;--a2:#3b82f6;--ok:#22c55e;--er:#ef4444;--bd:#222b55}
+[data-th=light]{--bg:#f1f3fb;--cd:#fff;--tx:#12163a;--mu:#586089;--bd:#dce1f2}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px system-ui,"Segoe UI",Tahoma,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+#app{max-width:720px;margin:auto;padding:14px 14px 90px;min-height:100vh}body.cv #app{opacity:0}
+button,input,select,textarea{font:inherit;color:inherit}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:12px;margin:4px 0 10px}
+input[type=checkbox],input[type=range]{width:auto;margin:0 6px}input[type=range]{width:100%}
+button{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;cursor:pointer}
+.pr{background:linear-gradient(135deg,var(--ac),var(--a2));border:0;color:#fff;font-weight:700;width:100%;padding:14px}
+.dg{color:var(--er)}.cd{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:14px;margin:8px 0}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.lg{font-size:22px;background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.ct{text-align:start;display:flex;flex-direction:column;gap:4px;border-top:3px solid var(--c)}.ct i,.it i{font-style:normal;font-size:24px}
+.it{display:flex;gap:12px;align-items:center;width:100%;text-align:start;margin:6px 0}.it div{flex:1;min-width:0}.it small,small{color:var(--mu)}.it b,.it small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nv{position:fixed;bottom:0;left:0;right:0;background:var(--cd);border-top:1px solid var(--bd);display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom));justify-content:center;gap:4px}
+.nv button{flex:1;max-width:160px;border:0;background:none;color:var(--mu);font-size:12px}.nv .on{color:var(--ac);font-weight:700}
+.fab{position:fixed;bottom:80px;inset-inline-end:16px;width:56px;height:56px;border-radius:50%;padding:0;font-size:28px;background:linear-gradient(135deg,var(--ac),var(--a2));color:#fff;border:0;box-shadow:0 6px 20px #0006}
+.md{position:fixed;inset:0;background:#000b;display:flex;align-items:flex-end;justify-content:center;z-index:9}.md>div{background:var(--bg);width:100%;max-width:720px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px}
+.ro{display:flex;gap:8px;align-items:center;justify-content:space-between;word-break:break-all}.rw{border-bottom:1px solid var(--bd);padding:8px 0}
+.ch{display:flex;gap:6px;overflow:auto;padding-bottom:6px}.ch button{white-space:nowrap;padding:6px 12px}.ch .on{background:var(--ac);color:#fff}
+.bar{height:6px;border-radius:3px;background:var(--bd);overflow:hidden}.bar div{height:100%;transition:width .2s}
+#tt{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--ok);color:#fff;padding:8px 16px;border-radius:20px;display:none;z-index:99}
+.ce{text-align:center;padding-top:12vh}.ce .lg{font-size:44px}.rkb{font:700 17px monospace;text-align:center;letter-spacing:1px;direction:ltr;background:var(--cd);padding:14px;border-radius:12px;word-break:break-all}
+</style></head><body><div id="app"></div><div id="tt"></div>
 <script>
-  let c = 0;
-  try { c = +localStorage.getItem("c") || 0 } catch(e){}
-  const n = document.getElementById("n");
-  n.textContent = c;
-  document.getElementById("b").onclick = () => {
-    c++; n.textContent = c;
-    try { localStorage.setItem("c", c) } catch(e){}
-    if (navigator.vibrate) navigator.vibrate(30);
-  };
-  document.getElementById("r").onclick = () => {
-    c = 0; n.textContent = 0;
-    try { localStorage.setItem("c", 0) } catch(e){}
-  };
-</script>
-</body>
-</html>
+const $=s=>document.querySelector(s),E=new TextEncoder,D=new TextDecoder,ls=localStorage;
+const b64=u=>{let s='';u.forEach(c=>s+=String.fromCharCode(c));return btoa(s)},ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0)),rnd=n=>crypto.getRandomValues(new Uint8Array(n));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const L={ar:{},en:{}};`app|أمان|AMAN
+ch|اختر اللغة|Choose language
+go|ابدأ|Start
+mk|أنشئ كلمة المرور الرئيسية|Create master password
+mw|كلمة المرور الرئيسية تحمي الخزنة كلها ولا يستطيع المطوّر استعادتها. إذا نسيتها فمفتاح الاستعادة هو طريقك الوحيد.|The master password protects the whole vault and the developer cannot recover it. If you forget it, the recovery key is your only way back.
+pw|كلمة المرور|Password
+cf|تأكيد كلمة المرور|Confirm password
+sh|10 أحرف على الأقل|At least 10 characters
+mm|كلمتا المرور غير متطابقتين|Passwords don't match
+rk|مفتاح الاستعادة|Recovery key
+rd|احفظه خارج هذا الجهاز. يظهر مرة واحدة فقط.|Store it off this device. Shown only once.
+rs|حفظته، تابع|I saved it, continue
+ul|فتح الخزنة|Unlock
+wr|كلمة المرور خاطئة|Wrong password
+wt|محاولات كثيرة، انتظر قليلاً|Too many attempts, wait a bit
+fg|نسيت كلمة المرور؟|Forgot password?
+rc|استعادة بالمفتاح|Recover with key
+nw|كلمة مرور جديدة|New password
+bad|بيانات غير صحيحة|Invalid data
+hm|الرئيسية|Home
+ac|الحسابات|Accounts
+gn|المولّد|Generator
+st|الإعدادات|Settings
+sr|بحث...|Search...
+ad|إضافة حساب|Add account
+sv|حفظ|Save
+cn|إلغاء|Cancel
+dl|حذف|Delete
+ed|تعديل|Edit
+cp|نسخ|Copy
+cd|تم النسخ (يُمسح بعد 30 ثانية)|Copied (cleared in 30 s)
+sw|إظهار/إخفاء|Show/Hide
+ti|العنوان|Title
+ct|الفئة|Category
+us|البريد أو اسم المستخدم|Email / username
+ur|رابط الدخول|Login URL
+ph|الهاتف|Phone
+re|بريد الاستعادة|Recovery email
+no|ملاحظات|Notes
+fv|المفضلة|Favorite
+tot|إجمالي الحسابات|Total accounts
+rec|أُضيفت مؤخراً|Recent
+em|لا توجد حسابات بعد. اضغط + لإضافة أول حساب.|No accounts yet. Tap + to add the first.
+az|أ-ي|A-Z
+nw2|الأحدث|Newest
+cdl|حذف هذا الحساب نهائياً؟|Delete this account permanently?
+ln|قفل الآن|Lock now
+lg|اللغة|Language
+th|المظهر (داكن/فاتح)|Theme (dark/light)
+al|القفل التلقائي|Auto-lock
+i0|فوراً|Immediately
+i1|30 ثانية|30 s
+i2|دقيقة|1 min
+i3|5 دقائق|5 min
+cm|تغيير كلمة المرور الرئيسية|Change master password
+op|الحالية|Current
+bk|نسخة احتياطية مشفرة|Encrypted backup
+bp|كلمة مرور النسخة|Backup password
+ex|تصدير|Export
+im|استيراد|Import
+bt|الصق نص النسخة هنا|Paste backup text here
+mg|دمج مع الحالي؟ (إلغاء = استبدال)|Merge with current? (Cancel = replace)
+ok|تم|Done
+sec|حالة الأمان|Security status
+wk|كلمات مرور ضعيفة|Weak passwords
+du|كلمات مرور مكررة|Reused passwords
+pv|يعمل بدون إنترنت. كل شيء مشفر بـ AES-256-GCM على جهازك ولا يُرسل لأي جهة.|Fully offline. Everything is AES-256-GCM encrypted on your device and never sent anywhere.
+cc|فئة جديدة|New category
+cnm|اسم الفئة|Category name
+len|الطول|Length
+amb|بدون أحرف ملتبسة|No ambiguous chars
+rg|توليد|Regenerate
+us2|استخدام في حساب|Use for account
+op2|فتح الموقع|Open site
+all|الكل|All
+c_gm|جيميل وجوجل|Gmail & Google
+c_ol|هوتميل وأوتلوك|Hotmail & Outlook
+c_yh|ياهو|Yahoo
+c_ig|انستغرام|Instagram
+c_fb|فيسبوك|Facebook
+c_tt|تيك توك|TikTok
+c_yt|يوتيوب|YouTube
+c_dc|ديسكورد|Discord
+c_tg|تلغرام|Telegram
+c_gd|ألعاب|Gaming
+c_ws|مواقع وخدمات|Websites
+c_bk|بنوك ومالية|Banking
+c_ot|أخرى|Other`.split('\n').forEach(l=>{const[k,a,e]=l.split('|');L.ar[k]=a;L.en[k]=e});
+const C=[['gm','📧','#ea4335'],['ol','📨','#0078d4'],['yh','💌','#8e24aa'],['ig','📷','#e1306c'],['fb','👥','#1877f2'],['tt','🎵','#00c8c8'],['yt','▶️','#ff0000'],['dc','💬','#5865f2'],['tg','✈️','#26a5e4'],['gd','🎮','#22c55e'],['ws','🌐','#f59e0b'],['bk','🏦','#d4af37'],['ot','📁','#8b93bd']];
+let LG=ls.aman_lg||(navigator.language.startsWith('ar')?'ar':'en'),TH=ls.aman_th||'dark',M=JSON.parse(ls.aman_m||'null'),dek=null,dk=null,V=null,S={v:'home',cat:'',q:'',so:'t',fv:0,m:null,sh:0,st:0},G={len:20,u:1,l:1,n:1,s:1,x:1,p:''},hid=0,tm,rkTmp='';
+const t=k=>L[LG][k]||k,sm=()=>ls.aman_m=JSON.stringify(M);
+const cats=()=>[...C.map(([id,i,c])=>({id,i,c,n:t('c_'+id)})),...V.cats.map(x=>({...x,cu:1}))],cat=id=>cats().find(c=>c.id==id)||cats()[12];
+// ---- crypto: PBKDF2-SHA256 -> KEK, random 256-bit vault key wrapped by KEK, AES-256-GCM everywhere
+async function kek(pw,salt){const m=await crypto.subtle.importKey('raw',E.encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:310000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+const enc=async(k,u)=>{const iv=rnd(12);return{iv:b64(iv),ct:b64(new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},k,u)))}};
+const dec=async(k,o)=>new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(o.iv)},k,ub(o.ct)));
+const ik=r=>crypto.subtle.importKey('raw',r,'AES-GCM',false,['encrypt','decrypt']);
+const sv=async()=>{ls.aman_v=JSON.stringify(await enc(dk,E.encode(JSON.stringify(V))))};
+const ru=n=>{const r=new Uint32Array(1),l=Math.floor(2**32/n)*n;do crypto.getRandomValues(r);while(r[0]>=l);return r[0]%n};
+const nk=s=>s.toUpperCase().replace(/[^A-Z2-7]/g,'');
+const rewrap=async(pw,d)=>{const s=rnd(16);M.s=b64(s);M.w=await enc(await kek(pw,s),d);sm()};
+async function setup(pw){const d=rnd(32),A='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';let r='';for(let i=0;i<24;i++)r+=A[ru(32)];const s2=rnd(16);M={s2:b64(s2),w2:await enc(await kek(r,s2),d),f:0,u:0,lk:60};await rewrap(pw,d);dek=d;dk=await ik(d);V={cats:[],acc:[]};await sv();sm();return r.match(/.{4}/g).join('-')}
+async function unlock(pw){if(Date.now()<M.u)return 2;try{const d=await dec(await kek(pw,ub(M.s)),M.w);dek=d;dk=await ik(d);V=JSON.parse(D.decode(await dec(dk,JSON.parse(ls.aman_v))));M.f=0;sm();idle();return 1}catch{M.f=(M.f||0)+1;if(M.f>=3)M.u=Date.now()+Math.min(2**(M.f-3)*5,3600)*1000;sm();return 0}}
+const lock=()=>{dek=dk=V=null;S.q='';S.m=null;S.v='home';render()};
+const idle=()=>{clearTimeout(tm);if(V)tm=setTimeout(lock,Math.max(M.lk,30)*1000)};
+['click','keydown','touchstart'].forEach(e=>addEventListener(e,idle,{passive:true}));
+document.addEventListener('visibilitychange',()=>{if(document.hidden){hid=Date.now();document.body.classList.add('cv')}else{document.body.classList.remove('cv');if(V&&Date.now()-hid>=M.lk*1000)lock()}});
+// ---- helpers
+function toast(m){const e=$('#tt');e.textContent=m;e.style.display='block';setTimeout(()=>e.style.display='none',1600)}
+function cpy(v){navigator.clipboard.writeText(v).then(()=>{toast(t('cd'));setTimeout(()=>navigator.clipboard.writeText(' ').catch(()=>{}),30000)}).catch(()=>{})}
+const pool=p=>(/[a-z]/.test(p)?26:0)+(/[A-Z]/.test(p)?26:0)+(/\d/.test(p)?10:0)+(/[^A-Za-z0-9]/.test(p)?32:0),ent=p=>p?p.length*Math.log2(pool(p)||1):0,col=e=>e<50?'#ef4444':e<70?'#f59e0b':e<90?'#22c55e':'#10b981';
+const bar=p=>{const e=ent(p);return`<div class=bar><div style="width:${Math.min(100,e)}%;background:${col(e)}"></div></div>`};
+function gen(){const f=s=>G.x?s.replace(/[Il1O0o|]/g,''):s,P=[];G.u&&P.push(f('ABCDEFGHIJKLMNOPQRSTUVWXYZ'));G.l&&P.push(f('abcdefghijklmnopqrstuvwxyz'));G.n&&P.push(f('0123456789'));G.s&&P.push('!@#$%^&*()-_=+[]{};:,.?');if(!P.length)P.push(f('abcdefghijklmnopqrstuvwxyz'));const all=P.join(''),o=P.map(x=>x[ru(x.length)]);while(o.length<G.len)o.push(all[ru(all.length)]);for(let i=o.length-1;i>0;i--){const j=ru(i+1);[o[i],o[j]]=[o[j],o[i]]}return o.join('')}
+// ---- views
+const hd=()=>`<div class=hd><b class=lg>🛡️ ${t('app')}</b><button data-a=lock>🔒 ${t('ln')}</button></div>`;
+const ai=a=>{const c=cat(a.cat);return`<button class=it data-a=open data-v="${a.id}"><i>${c.i}</i><div><b>${esc(a.t||a.u)}</b><small>${esc(a.u)}</small></div>${a.fav?'⭐':''}</button>`};
+function list(){let a=V.acc.filter(x=>(!S.cat||x.cat==S.cat)&&(!S.fv||x.fav));const q=S.q.toLowerCase();if(q)a=a.filter(x=>[x.t,x.u,cat(x.cat).n].some(s=>(s||'').toLowerCase().includes(q)));a.sort((x,y)=>S.so=='t'?(x.t||'').localeCompare(y.t||'',LG):y.cr-x.cr);return a}
+function vHome(){const r=[...V.acc].sort((a,b)=>b.cr-a.cr).slice(0,4),f=V.acc.filter(x=>x.fav).slice(0,4);return`<input id=q data-i=q placeholder="${t('sr')}" value="${esc(S.q)}"><div class=cd><small>${t('tot')}</small><div style="font-size:34px;font-weight:700">${V.acc.length}</div></div><div class=gr>${cats().map(c=>`<button class=ct style="--c:${c.c}" data-a=cat data-v="${c.id}"><i>${c.i}</i><b>${esc(c.n)}</b><small>${V.acc.filter(x=>x.cat==c.id).length}</small></button>`).join('')}</div>${f.length?`<h3>⭐ ${t('fv')}</h3>${f.map(ai).join('')}`:''}${r.length?`<h3>${t('rec')}</h3>${r.map(ai).join('')}`:`<p class=ce style="padding:20px;color:var(--mu)">${t('em')}</p>`}`}
+function vList(){const a=list();return`<input id=q data-i=q placeholder="${t('sr')}" value="${esc(S.q)}"><div class=ch><button class="${!S.cat&&!S.fv?'on':''}" data-a=cat data-v="">${t('all')}</button><button class="${S.fv?'on':''}" data-a=fvt>⭐</button>${cats().map(c=>`<button class="${S.cat==c.id?'on':''}" data-a=cat data-v="${c.id}">${c.i} ${esc(c.n)}</button>`).join('')}</div><div class=ch><button class="${S.so=='t'?'on':''}" data-a=so data-v=t>${t('az')}</button><button class="${S.so=='d'?'on':''}" data-a=so data-v=d>${t('nw2')}</button></div>${a.map(ai).join('')||`<p class=ce style="padding:20px;color:var(--mu)">${t('em')}</p>`}`}
+function vGen(){if(!G.p)G.p=gen();const k=(n,l)=>`<label><input type=checkbox data-a=gk data-v=${n} ${G[n]?'checked':''}>${l}</label> `;return`<div class=cd><div class=rkb style="font-size:19px">${esc(G.p)}</div>${bar(G.p)}<small>${Math.round(ent(G.p))} bits</small></div><div class=cd>${t('len')}: <b>${G.len}</b><input type=range min=12 max=64 value=${G.len} data-i=gl>${k('u','A-Z')}${k('l','a-z')}${k('n','0-9')}${k('s','#$%')}<br>${k('x',t('amb'))}</div><button class=pr data-a=gg>${t('rg')}</button><div style="display:flex;gap:8px;margin-top:8px"><button data-a=gc style="flex:1">${t('cp')}</button><select id=gu style="flex:1;margin:0"><option value="">${t('us2')}</option>${V.acc.map(a=>`<option value="${a.id}">${esc(a.t||a.u)}</option>`).join('')}</select><button data-a=gs>${t('sv')}</button></div>`}
+function vSet(){const w=V.acc.filter(a=>ent(a.p)<50).length,m={};V.acc.forEach(a=>a.p&&(m[a.p]=(m[a.p]||0)+1));const d=Object.values(m).filter(n=>n>1).length,b=(a,l,c='')=>`<button class="${c}" data-a=${a}>${l}</button> `;return`<div class=cd><b>${t('lg')}</b><br>${b('lg:ar','العربية',LG=='ar'?'on':'')}${b('lg:en','English',LG=='en'?'on':'')}<br><br><b>${t('th')}</b><br>${b('th:dark','🌙')}${b('th:light','☀️')}<br><br><b>${t('al')}</b><br>${[[0,'i0'],[30,'i1'],[60,'i2'],[300,'i3']].map(([s,k])=>b('lk:'+s,(M.lk==s?'✓ ':'')+t(k))).join('')}</div><div class=cd><b>${t('sec')}</b><div class=ro><span>${t('wk')}</span><b style="color:${w?'var(--er)':'var(--ok)'}">${w}</b></div><div class=ro><span>${t('du')}</span><b style="color:${d?'var(--er)':'var(--ok)'}">${d}</b></div></div><div class=cd><b>${t('cm')}</b><input id=po type=password placeholder="${t('op')}"><input id=pn type=password placeholder="${t('nw')}"><button data-a=cpw>${t('sv')}</button></div><div class=cd><b>${t('cc')}</b><div style="display:flex;gap:6px"><input id=cn1 placeholder="${t('cnm')}"><input id=ci style="width:70px" value="⭐"><input id=cc1 type=color value="#7c5cff" style="width:60px;padding:2px"></div><button data-a=acat>+</button>${V.cats.map(c=>`<div class=ro style="margin-top:6px"><span>${c.i} ${esc(c.n)}</span><span><button data-a=rcat data-v="${c.id}">${t('ed')}</button> <button class=dg data-a=dcat data-v="${c.id}">${t('dl')}</button></span></div>`).join('')}</div><div class=cd><b>${t('bk')}</b><input id=bp type=password placeholder="${t('bp')}"><textarea id=bx rows=3 placeholder="${t('bt')}"></textarea><button data-a=exp>${t('ex')}</button> <button data-a=imp>${t('im')}</button></div><div class=cd><small>${t('pv')}</small><br><small>v1.0</small></div>${b('lock','🔒 '+t('ln'))}`}
+function modal(){const m=S.m;if(m.t=='d'){const a=V.acc.find(x=>x.id==m.id);if(!a)return'';const r=(l,v,c)=>v?`<div class=rw><small>${l}</small><div class=ro><span>${v}</span>${c?`<button data-a=cf data-v=${c}>${t('cp')}</button>`:''}</div></div>`:'',c=cat(a.cat),dt=x=>new Date(x).toLocaleString(LG);return`<div class=md><div><div class=hd><b>${c.i} ${esc(a.t)}</b><button data-a=x>✕</button></div>${r(t('us'),esc(a.u),'u')}<div class=rw><small>${t('pw')}</small><div class=ro><span style="direction:ltr">${S.sh?esc(a.p):'••••••••'}</span><span><button data-a=sh>👁</button> <button data-a=cf data-v=p>${t('cp')}</button></span></div></div>${r(t('ur'),a.url?`<a href="${esc(a.url)}" target=_blank rel="noopener noreferrer" style="color:var(--a2)">${t('op2')} ↗</a>`:'')}${r(t('ph'),esc(a.ph))}${r(t('re'),esc(a.re))}${r(t('no'),esc(a.no))}${r('',`<small>${dt(a.cr)} / ${dt(a.md)}</small>`)}<br><div style="display:flex;gap:8px"><button data-a=fav style="flex:1">${a.fav?'★':'☆'} ${t('fv')}</button><button data-a=edit style="flex:1">${t('ed')}</button><button class=dg data-a=del style="flex:1">${t('dl')}</button></div></div></div>`}
+const a=V.acc.find(x=>x.id==m.id)||{cat:S.cat||'ot'},f=(i,l,v,ty='text')=>`<label>${l}<input id=f_${i} type=${ty} value="${esc(v)}"></label>`;return`<div class=md><div><div class=hd><b>${t(m.id?'ed':'ad')}</b><button data-a=x>✕</button></div>${f('t',t('ti'),a.t||'')}<label>${t('ct')}<select id=f_c>${cats().map(c=>`<option value="${c.id}" ${c.id==a.cat?'selected':''}>${c.i} ${esc(c.n)}</option>`).join('')}</select></label>${f('u',t('us'),a.u||'')}<label>${t('pw')}<div style="display:flex;gap:6px"><input id=f_p type=password value="${esc(a.p||'')}" style="direction:ltr"><button data-a=ft style="margin:4px 0 10px">👁</button><button data-a=fg style="margin:4px 0 10px">🎲</button></div></label>${f('url',t('ur'),a.url||'','url')}${f('ph',t('ph'),a.ph||'','tel')}${f('re',t('re'),a.re||'','email')}<label>${t('no')}<textarea id=f_no rows=3>${esc(a.no||'')}</textarea></label><label><input type=checkbox id=f_fv ${a.fav?'checked':''}>${t('fv')}</label><br><br><button class=pr data-a=save>${t('sv')}</button></div></div>`}
+function render(){document.documentElement.lang=LG;document.documentElement.dir=LG=='ar'?'rtl':'ltr';document.documentElement.dataset.th=TH;const a=$('#app');let h;
+if(!M||!M.w){if(!S.st)h=`<div class=ce><div class=lg>🛡️ ${t('app')}</div><h3>${t('ch')}</h3><button class=pr data-a=lg:ar>العربية</button><br><br><button class=pr data-a=lg:en>English</button></div>`;
+else if(S.st==1)h=`<div class=ce style="padding-top:6vh"><div class=lg>🛡️</div><h2>${t('mk')}</h2><p style="color:var(--mu)">${t('mw')}</p><input id=p1 type=password data-i=sm placeholder="${t('pw')} (${t('sh')})" autocomplete=new-password><div id=sb class=bar><div></div></div><br><input id=p2 type=password placeholder="${t('cf')}" autocomplete=new-password><button class=pr data-a=su2>${t('go')}</button></div>`;
+else h=`<div class=ce style="padding-top:6vh"><h2>🔑 ${t('rk')}</h2><p style="color:var(--mu)">${t('rd')}</p><div class=rkb>${rkTmp}</div><br><button data-a=rkc>${t('cp')}</button><br><br><button class=pr data-a=su3>${t('rs')}</button></div>`}
+else if(!V){h=S.fg?`<div class=ce><div class=lg>🛡️</div><h3>${t('rc')}</h3><input id=rk1 placeholder="XXXX-XXXX-..." style="direction:ltr"><input id=p1 type=password placeholder="${t('nw')} (${t('sh')})"><button class=pr data-a=rcv>${t('rc')}</button><br><br><button data-a=fgx>${t('cn')}</button></div>`:`<div class=ce><div class=lg>🛡️ ${t('app')}</div><br><input id=p1 type=password placeholder="${t('pw')}" autocomplete=current-password><button class=pr data-a=ul>🔓 ${t('ul')}</button><br><br><button data-a=fg1 style="border:0;color:var(--mu)">${t('fg')}</button></div>`}
+else h=hd()+(S.v=='home'?vHome():S.v=='list'?vList():S.v=='gen'?vGen():vSet())+(S.v=='list'||S.v=='home'?`<button class=fab data-a=add>+</button>`:'')+`<div class=nv>${[['home','🏠','hm'],['list','🗂️','ac'],['gen','🎲','gn'],['set','⚙️','st']].map(([v,i,k])=>`<button class="${S.v==v?'on':''}" data-a=nav data-v=${v}>${i}<br>${t(k)}</button>`).join('')}</div>`+(S.m?modal():'');
+a.innerHTML=h;if(S.ff){const q=$('#q');if(q){q.focus();q.setSelectionRange(99,99)}}}
+// ---- events
+document.addEventListener('input',e=>{const i=e.target.dataset.i;if(i=='q'){S.q=e.target.value;if(S.v=='home')S.v='list';S.ff=1;render()}else if(i=='gl'){G.len=+e.target.value;G.p='';S.ff=0;render()}else if(i=='sm'){const b=$('#sb div');b.style.width=Math.min(100,ent(e.target.value))+'%';b.style.background=col(ent(e.target.value))}});
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-a]');if(!b)return;S.ff=0;let[a,v]=[b.dataset.a,b.dataset.v];if(a.includes(':'))[a,v]=a.split(':');const V_=id=>($('#'+id)||{}).value||'';try{switch(a){
+case'lg':LG=v;ls.aman_lg=v;if(!M||!M.w)S.st=1;break;
+case'su2':{const p=V_('p1');if(p.length<10)return toast(t('sh'));if(p!=V_('p2'))return toast(t('mm'));rkTmp=await setup(p);S.st=2;break}
+case'rkc':return cpy(rkTmp);case'su3':rkTmp='';S.st=0;break;
+case'ul':{const r=await unlock(V_('p1'));if(r!=1)return toast(t(r?'wt':'wr'));break}
+case'fg1':S.fg=1;break;case'fgx':S.fg=0;break;
+case'rcv':{const p=V_('p1');if(p.length<10)return toast(t('sh'));try{const d=await dec(await kek(nk(V_('rk1')),ub(M.s2)),M.w2);await rewrap(p,d);M.f=0;M.u=0;sm();S.fg=0;toast(t('ok'))}catch{return toast(t('bad'))}break}
+case'lock':lock();return;case'nav':S.v=v;S.cat='';S.fv=0;S.q='';break;case'cat':S.cat=v;S.v='list';break;case'fvt':S.fv=!S.fv;break;case'so':S.so=v;break;
+case'add':S.m={t:'f'};break;case'open':S.m={t:'d',id:v};S.sh=0;break;case'x':S.m=null;break;case'sh':S.sh=!S.sh;break;case'edit':S.m={t:'f',id:S.m.id};break;
+case'cf':cpy(V.acc.find(x=>x.id==S.m.id)[v]);return;
+case'fav':{const x=V.acc.find(x=>x.id==S.m.id);x.fav=!x.fav;await sv();break}
+case'del':if(confirm(t('cdl'))){V.acc=V.acc.filter(x=>x.id!=S.m.id);await sv();S.m=null}break;
+case'ft':{const i=$('#f_p');i.type=i.type=='password'?'text':'password';return}
+case'fg':{const o=G.p;G.p='';G.len=Math.max(G.len,20);$('#f_p').value=gen();$('#f_p').type='text';G.p=o;return}
+case'save':{const o={t:V_('f_t').trim(),cat:V_('f_c'),u:V_('f_u').trim(),p:V_('f_p'),url:V_('f_url').trim(),ph:V_('f_ph'),re:V_('f_re'),no:V_('f_no'),fav:$('#f_fv').checked,md:Date.now()};if(!o.t&&!o.u)return toast(t('ti'));if(S.m.id)Object.assign(V.acc.find(x=>x.id==S.m.id),o);else V.acc.push({...o,id:crypto.randomUUID(),cr:Date.now()});await sv();S.m=null;break}
+case'gg':G.p='';break;case'gk':G[v]=b.checked?1:0;G.p='';break;case'gc':return cpy(G.p);
+case'gs':{const x=V.acc.find(x=>x.id==V_('gu'));if(!x)return;x.p=G.p;x.md=Date.now();await sv();return toast(t('ok'))}
+case'th':TH=v;ls.aman_th=v;break;case'lk':M.lk=+v;sm();idle();break;
+case'cpw':{try{const d=await dec(await kek(V_('po'),ub(M.s)),M.w);if(V_('pn').length<10)return toast(t('sh'));await rewrap(V_('pn'),d);toast(t('ok'))}catch{return toast(t('wr'))}break}
+case'acat':{const n=V_('cn1').trim();if(!n)return;V.cats.push({id:'u'+Date.now(),n,i:V_('ci')||'⭐',c:V_('cc1')});await sv();break}
+case'rcat':{const c=V.cats.find(x=>x.id==v),n=prompt(t('cnm'),c.n);if(n){c.n=n;await sv()}break}
+case'dcat':if(confirm(t('dl')+'?')){V.acc.forEach(x=>x.cat==v&&(x.cat='ot'));V.cats=V.cats.filter(c=>c.id!=v);await sv()}break;
+case'exp':{const pw=V_('bp');if(pw.length<10)return toast(t('sh'));const s=rnd(16),o=await enc(await kek(pw,s),E.encode(JSON.stringify(V)));const x='AMAN1.'+b64(E.encode(JSON.stringify({s:b64(s),...o})));$('#bx').value=x;cpy(x);return}
+case'imp':{try{const j=JSON.parse(D.decode(ub(V_('bx').trim().replace('AMAN1.',''))));const n=JSON.parse(D.decode(await dec(await kek(V_('bp'),ub(j.s)),j)));if(!Array.isArray(n.acc))throw 0;if(confirm(t('mg'))){const ids=new Set(V.acc.map(x=>x.id));n.acc.forEach(x=>ids.has(x.id)||V.acc.push(x));const ci=new Set(V.cats.map(x=>x.id));(n.cats||[]).forEach(x=>ci.has(x.id)||V.cats.push(x))}else V={cats:n.cats||[],acc:n.acc};await sv();toast(t('ok'))}catch{return toast(t('bad'))}break}
+}}catch(er){toast(t('bad'))}render()});
+render();
+</script></body></html>
