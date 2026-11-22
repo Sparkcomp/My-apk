@@ -29,6 +29,10 @@ jobs:
       - name: Add Android platform
         run: npx cap add android
 
+      - name: Add biometric permission
+        run: |
+          sed -i 's#</manifest>#    <uses-permission android:name="android.permission.USE_BIOMETRIC" />\n</manifest>#' android/app/src/main/AndroidManifest.xml
+
       - name: Generate icons (if icon.png exists)
         if: hashFiles('icon.png') != ''
         run: npx --yes @capacitor/assets generate --android
